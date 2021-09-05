@@ -1,0 +1,16 @@
+{
+  "name": "instaclone",
+  "version": "0.0.1",
+  "description": "Backend de instaclone",
+  "main": "index.js",
+  "author": "Daniel Carmona Gilibert",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node ./index.js"
+  },
+  "dependencies": {
+    "apollo-server": "^3.3.0",
+    "dotenv": "^10.0.0",
+    "mongoose": "^6.0.4"
+  }
+}
