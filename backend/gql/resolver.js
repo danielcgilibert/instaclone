@@ -6,6 +6,14 @@ const resolvers = {
       return null;
     },
   },
+  Mutation: {
+    // User
+    register: (_, { input }) => {
+      console.log("Registrando Usuarios");
+      console.log(input);
+      return null;
+    },
+  },
 };
 
 module.exports = resolvers;
