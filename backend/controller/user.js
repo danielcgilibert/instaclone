@@ -1,14 +1,17 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
+function getUser() {
+  console.log("Obteniendo usuario");
+  return null;
+}
+
 async function register(input) {
-  console.log(input);
   const newUser = input;
   newUser.email = newUser.email.toLowerCase();
   newUser.username = newUser.username.toLowerCase();
 
   const { email, username, password } = newUser;
-
   // Revisar si el email esta en uso
   const foundEmail = await User.findOne({ email });
   if (foundEmail) throw new Error("El email ya esta en uso");
@@ -34,4 +37,5 @@ async function register(input) {
 
 module.exports = {
   register,
+  getUser,
 };
