@@ -6,7 +6,7 @@ const UserSchema = Schema({
     type: String,
     require: true,
   },
-  userName: {
+  username: {
     type: String,
     require: true,
     trim: true,
