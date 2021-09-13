@@ -1,5 +1,18 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+function createToken(user, SECRET_KEY, expiresIn) {
+  const { id, name, email, username } = user;
+  const payload = {
+    id,
+    name,
+    email,
+    username,
+  };
+
+  return jwt.sign(payload, SECRET_KEY, { expiresIn });
+}
 
 function getUser() {
   console.log("Obteniendo usuario");
@@ -35,7 +48,22 @@ async function register(input) {
   return null;
 }
 
+async function login(input) {
+  const { email, password } = input;
+
+  const userFound = await User.findOne({ email: email.toLowerCase() });
+  if (!userFound) throw new Error("Error en el email o contraseña");
+
+  const passwordSuccess = await bcrypt.compare(password, userFound.password);
+  if (!passwordSuccess) throw new Error("Error en el email o contraseña");
+
+  return {
+    token: createToken(userFound, process.env.SECRET_KEY, "24h"),
+  };
+}
+
 module.exports = {
   register,
   getUser,
+  login,
 };
