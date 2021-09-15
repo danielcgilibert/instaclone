@@ -7,16 +7,6 @@
   flex-direction: column;
   height: 100vh;
   background-color: $background-grey-light;
-  animation: 2s ease-out 0s 1 slideInFromLeft;
-
-  @keyframes slideInFromLeft {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
 
   img {
     width: 250px;

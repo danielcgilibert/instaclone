@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Image, Button } from "semantic-ui-react";
 import instaclone from "../../assets/images/2.1 instaclone.png";
+import { RegisterForm } from "../../components/Auth/RegisterForm/RegisterForm";
 
 import "./Auth.scss";
 
@@ -11,7 +12,11 @@ export const Auth = () => {
       <Image src={instaclone} />
 
       <div className="container-form">
-        {showLogin ? <p>Formulario Login</p> : <p>Formulario Registro</p>}
+        {showLogin ? (
+          <RegisterForm setShowLogin={setShowLogin} />
+        ) : (
+          <p>Formulario Registro</p>
+        )}
       </div>
 
       <div className="change-form">
