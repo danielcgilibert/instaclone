@@ -11,3 +11,11 @@ export const REGISTER = gql`
     }
   }
 `;
+
+export const LOGIN = gql`
+  mutation LoginMutation($loginInput: LoginInput) {
+    login(input: $loginInput) {
+      token
+    }
+  }
+`;
