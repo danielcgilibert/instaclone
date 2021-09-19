@@ -13,9 +13,9 @@ export const Auth = () => {
 
       <div className="container-form">
         {showLogin ? (
-          <RegisterForm setShowLogin={setShowLogin} />
+          <p>Formulario Login</p>
         ) : (
-          <p>Formulario Registro</p>
+          <RegisterForm setShowLogin={setShowLogin} />
         )}
       </div>
 
