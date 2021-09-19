@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Button } from "semantic-ui-react";
 import { initialValues } from "./initialValues";
-import { useFormik } from "formik";
+import { useFormik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./RegisterForm.scss";
 
@@ -42,7 +42,7 @@ export const RegisterForm = ({ setShowLogin }) => {
           placeholder="Nombre y apellidos"
           name="name"
           onChange={formik.handleChange}
-          error={formik.errors.name && true}
+          error={formik.touched.name && formik.errors.name}
         />
 
         <Form.Input
@@ -50,14 +50,14 @@ export const RegisterForm = ({ setShowLogin }) => {
           placeholder="Nombre de usuario"
           name="username"
           onChange={formik.handleChange}
-          error={formik.errors.username && true}
+          error={formik.touched.username && formik.errors.username}
         />
         <Form.Input
           type="email"
           placeholder="Correo electronico"
-          name="email"
+          name="text"
           onChange={formik.handleChange}
-          error={formik.errors.email && true}
+          error={formik.touched.email && formik.errors.email}
         />
 
         <Form.Input
@@ -65,7 +65,7 @@ export const RegisterForm = ({ setShowLogin }) => {
           placeholder="Contraseña"
           name="password"
           onChange={formik.handleChange}
-          error={formik.errors.password && true}
+          error={formik.touched.password && formik.errors.password}
         />
 
         <Form.Input
@@ -73,7 +73,7 @@ export const RegisterForm = ({ setShowLogin }) => {
           placeholder="Repetir contraseña"
           name="password2"
           onChange={formik.handleChange}
-          error={formik.errors.password2 && true}
+          error={formik.touched.password2 && formik.errors.password2}
         />
 
         <Button type="submit" className="btn-submit">
