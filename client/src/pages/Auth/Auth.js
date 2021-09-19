@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Container, Image, Button } from "semantic-ui-react";
+import { Container, Image } from "semantic-ui-react";
 import instaclone from "../../assets/images/2.1 instaclone.png";
 import { RegisterForm } from "../../components/Auth/RegisterForm/RegisterForm";
-
 import "./Auth.scss";
 
 export const Auth = () => {
