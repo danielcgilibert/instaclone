@@ -1,11 +1,16 @@
 import React from "react";
 import { Form, Button } from "semantic-ui-react";
 import { initialValues } from "./initialValues";
-import { useFormik, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
+import { useMutation } from "@apollo/client";
+import { REGISTER } from "../../../gql/user";
 import "./RegisterForm.scss";
 
 export const RegisterForm = ({ setShowLogin }) => {
+  const [register] = useMutation(REGISTER);
+
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object({
@@ -26,8 +31,23 @@ export const RegisterForm = ({ setShowLogin }) => {
         .required("La contraseña es obligatoria")
         .oneOf([Yup.ref("password")], "Las contraseña no son iguales"),
     }),
-    onSubmit: (formValue) => {
-      console.log(formValue);
+    onSubmit: async (formData) => {
+      try {
+        const newUser = formData;
+        delete newUser.password2;
+        console.log(formData);
+
+        const result = await register({
+          variables: {
+            registerInput: newUser,
+          },
+        });
+        toast.success("Usuario registrado correctamente");
+        setShowLogin(true);
+      } catch (error) {
+        toast.error(error.message);
+        console.log(error);
+      }
     },
   });
 
@@ -53,9 +73,9 @@ export const RegisterForm = ({ setShowLogin }) => {
           error={formik.touched.username && formik.errors.username}
         />
         <Form.Input
-          type="email"
+          type="text"
           placeholder="Correo electronico"
-          name="text"
+          name="email"
           onChange={formik.handleChange}
           error={formik.touched.email && formik.errors.email}
         />
