@@ -4,13 +4,16 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../../gql/user";
-import { setToken } from "../../../utils/token";
+import { setToken, decodeToken } from "../../../utils/token";
 import "./LoginForm.scss";
 import { Message } from "semantic-ui-react";
+import useAuth from "../../../hooks/useAuth";
 
 export const LoginForm = () => {
   const [error, setError] = useState("");
   const [login] = useMutation(LOGIN);
+
+  const { setUser } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -34,6 +37,7 @@ export const LoginForm = () => {
 
         const { token } = data.login;
         setToken(token);
+        setUser(decodeToken(token));
       } catch (error) {
         setError(error.message);
         console.error(error);
