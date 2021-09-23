@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import "./RightHeader.scss";
 import ImageNoFound from "../../assets/images/default-avatar.png";
 export const RightHeader = () => {
+  const { auth } = useAuth();
   return (
     <>
       <div className="right-header">
@@ -12,7 +13,7 @@ export const RightHeader = () => {
           <Icon name="home" />
         </Link>
         <Icon name="plus" />
-        <Link to="/">
+        <Link to={`/${auth.username}`}>
           <Image src={ImageNoFound} avatar />
         </Link>
       </div>
