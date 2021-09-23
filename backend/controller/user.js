@@ -14,9 +14,13 @@ function createToken(user, SECRET_KEY, expiresIn) {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
 
-function getUser() {
-  console.log("Obteniendo usuario");
-  return null;
+async function getUser(id, username) {
+  let user = null;
+  if (id) user = await User.findById(id);
+  if (username) user = await User.findOne({ username });
+  if (!user) throw new Error("El usuario no existe");
+
+  return user;
 }
 
 async function register(input) {
