@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Grid, Image } from "semantic-ui-react";
 import { GET_USER } from "../../gql/user";
-import "./Profile.scss";
 import { UserNoFound } from "../UserNoFound/UserNoFound";
+import { ModalBasic } from "../Modal/ModalBasic/ModalBasic";
 import ImageNoFound from "../../assets/images/default-avatar.png";
+import "./Profile.scss";
 
 export const Profile = ({ username }) => {
+  const [showModal, setShowModal] = useState(false);
   const { data, loading, error } = useQuery(GET_USER, {
     variables: {
       username,
@@ -20,7 +22,11 @@ export const Profile = ({ username }) => {
     <>
       <Grid className="profile">
         <Grid.Column width={5} className="profile__left">
-          <Image src={ImageNoFound} avatar />
+          <Image
+            src={ImageNoFound}
+            avatar
+            onClick={() => setShowModal(!showModal)}
+          />
         </Grid.Column>
         <Grid.Column width={11} className="profile__right">
           <div>Header Profile</div>
@@ -38,6 +44,13 @@ export const Profile = ({ username }) => {
             )}
           </div>
         </Grid.Column>
+        <ModalBasic
+          show={showModal}
+          setShow={setShowModal}
+          title="Subir avatar"
+        >
+          <p>OPciones...</p>
+        </ModalBasic>
       </Grid>
     </>
   );
