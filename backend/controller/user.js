@@ -66,8 +66,14 @@ async function login(input) {
   };
 }
 
+async function updateAvatar(file) {
+  console.log(file);
+  return null;
+}
+
 module.exports = {
   register,
   getUser,
   login,
+  updateAvatar,
 };
